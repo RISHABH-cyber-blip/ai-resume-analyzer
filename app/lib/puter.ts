@@ -242,6 +242,18 @@ export const usePuterStore = create<PuterStore>((set, get) => {
     };
 
     const init = (): void => {
+        // Ensure Puter SDK is loaded on the client
+        if (typeof window !== "undefined" && typeof document !== "undefined") {
+            if (!getPuter()) {
+                const existing = document.querySelector('script[src="https://js.puter.com/v2/"]') as HTMLScriptElement | null;
+                if (!existing) {
+                    const script = document.createElement("script");
+                    script.src = "https://js.puter.com/v2/";
+                    script.async = true;
+                    document.body.appendChild(script);
+                }
+            }
+        }
         const puter = getPuter();
         if (puter) {
             set({ puterReady: true });

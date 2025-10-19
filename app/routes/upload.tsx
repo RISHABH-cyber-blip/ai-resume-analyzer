@@ -71,7 +71,7 @@ const Upload = () => {
         await kv.set(`.resumes.${uuid}`,JSON.stringify(data));
         setstatusText('Ananlysis complete...redirecting');
 
-        console.log(data);
+        navigate(`/resume/${uuid}`);
     }
 
     /*const handleAnalyze = async ({companyName:string,jobTitle:String,jobDescription:String,file:File})=>{

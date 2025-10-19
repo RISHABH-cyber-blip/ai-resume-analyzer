@@ -30,7 +30,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
     useEffect(()=>{
         init()
-    },[init])
+        // intentionally run once on mount; init sets up SDK and auth listeners
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
   return (
     <html lang="en">
       <head>
@@ -40,7 +42,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-      <script src="https://js.puter.com/v2/"></script>
       {children}
         <ScrollRestoration />
         <Scripts />
